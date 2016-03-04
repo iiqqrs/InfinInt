@@ -21,17 +21,39 @@ void InfinInt::StringToVec(string s){
         buffer.erase(0, 1);
     }
     for(int i = buffer.length(); i > 0; i--){
-       bigInt.push_back(i);
-    }
-    for(int i = 0; i < bigInt.size(); i ++) {
-        cout << bigInt.at(i) << endl;
+       bigInt.push_back(buffer[i-1] - '0');
     }
 }
-
+InfinInt* Resize(InfinInt* a, InfinInt* b){
+    int add_size = 0;
+    if(a->GetVector().size() > b->GetVector().size()){
+        add_size = (a->GetVector().size() - b->GetVector().size());
+        
+        // add to b here and then return
+        for (int i=0; i < add_size; ++i){
+            b->GetVector().push_back(0);
+        }
+    //    for (int i = 0; i < b->GetVector().size(); i++) {
+      //      cout << b->GetVector().at(i) << endl;
+    //    }
+        return b;
+    }
+    else if(b->GetVector().size() > a->GetVector().size()){
+        add_size = (b->GetVector().size() - a->GetVector().size());
+        
+        // add to a here and then return
+        for (int i=0; i < add_size; ++i){
+            a->GetVector().push_back(0);
+        }
+        return a;
+    }
+}
+/*
 void Resize(InfinInt* a, InfinInt* b){
     int add_size = 0;
     if(a->GetVector().size() > b->GetVector().size()){
         add_size = (a->GetVector().size() - b->GetVector().size());
+        cout << add_size << endl;
         
         // add to b here and then return
         for (int i=0; i < add_size; ++i){
@@ -47,6 +69,7 @@ void Resize(InfinInt* a, InfinInt* b){
         }
     }
 }
+*/
 
 //Construct InfinInt
 InfinInt::InfinInt(string number){

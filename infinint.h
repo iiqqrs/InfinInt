@@ -17,6 +17,6 @@ using namespace std;
             InfinInt(string number);
             ~InfinInt();
             friend InfinInt operator + (InfinInt, InfinInt);
-            void friend Resize(InfinInt a, InfinInt b);
+            friend InfinInt* Resize(InfinInt* a, InfinInt* b);
     };
 #endif
