@@ -9,10 +9,14 @@ using namespace std;
 #define InfinInt_H
     class InfinInt{
         private:
-           vector<bitset<4> > vecBitSet;
-           bitset<4> bitify(char c);
+            bool is_neg = false;
+            void Resize(InfinInt a, InfinInt b);
+            void StringToVec(string s);
+            vector<int> bigInt;
         public:
+            vector<int> GetVector();
             InfinInt(string number);
-            void asBits();
+            ~InfinInt();
+            friend InfinInt operator + (InfinInt, InfinInt);
     };
 #endif

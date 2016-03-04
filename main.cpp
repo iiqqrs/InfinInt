@@ -2,10 +2,21 @@
 #include <cstdlib>
 #include "infinint.h"
 #include <string>
+#include <fstream>
 using namespace std;
 
 int main() {
-   InfinInt* i = new InfinInt("3967994432"); // Larger than 4294967295  ;)
-   i->asBits(); // Should output 0011 1001 0110 0111 1001 1001 0100 0100 0011 0010
+   ifstream inFS;
+   string data;
+   inFS.open("int1");
+   inFS >> data;
+   
+   InfinInt* i = new InfinInt("-1234");
    delete i;
 }
+
+
+
+
+
+
