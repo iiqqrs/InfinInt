@@ -11,8 +11,16 @@ int main() {
    inFS.open("int1");
    inFS >> data;
    
-   InfinInt* i = new InfinInt("-1234");
-   delete i;
+   InfinInt* biggerNum = new InfinInt("-1234");
+   InfinInt* smallerNum = new InfinInt("12391933");
+   
+   Resize(biggerNum, smallerNum);
+   for (int i = 0; i < smallerNum->GetVector().size(); i++) {
+      cout << smallerNum->GetVector().at(i);
+   }
+   
+   delete biggerNum;
+   delete smallerNum;
 }
 
 

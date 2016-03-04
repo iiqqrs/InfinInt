@@ -10,7 +10,6 @@ using namespace std;
     class InfinInt{
         private:
             bool is_neg = false;
-            void Resize(InfinInt a, InfinInt b);
             void StringToVec(string s);
             vector<int> bigInt;
         public:
@@ -18,5 +17,6 @@ using namespace std;
             InfinInt(string number);
             ~InfinInt();
             friend InfinInt operator + (InfinInt, InfinInt);
+            void friend Resize(InfinInt a, InfinInt b);
     };
 #endif
