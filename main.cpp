@@ -6,26 +6,24 @@
 using namespace std;
 
 int main() {
-   ifstream inFS;
-   string data;
-   inFS.open("int1");
-   inFS >> data;
+
+   InfinInt* biggerNumPtr = new InfinInt("-56464555");
+  
+   InfinInt* smallerNumPtr = new InfinInt("564646");
+
+   InfinInt* output = new InfinInt();
    
-   InfinInt* smallerNum = new InfinInt("-9876");
-   InfinInt* biggerNum = new InfinInt("12391933");
+   /*
+   cout << "Please enter an infinint: " <<endl;
+   cin >> output;
+   cout << output;
+   */
    
+   output = *smallerNumPtr + *biggerNumPtr;
+   //output = *biggerNumPtr - *smallerNumPtr;
    
-   smallerNum = Resize(biggerNum, smallerNum);
-   for (int i = 0; i < smallerNum->GetVector().size(); i++) {
-      cout << smallerNum->GetVector().at(i) << endl;
-   }
-   
-   delete biggerNum;
-   delete smallerNum;
+   cout << output;
+
+   delete biggerNumPtr;
+   delete smallerNumPtr;
 }
-
-
-
-
-
-
