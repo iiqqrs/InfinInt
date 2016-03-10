@@ -6,12 +6,21 @@
 #include "infinint.h"
 using namespace std;
 
+/*
+ ___   __    _  _______  ___   __    _  ___   __    _  _______ 
+|   | |  |  | ||       ||   | |  |  | ||   | |  |  | ||       |
+|   | |   |_| ||    ___||   | |   |_| ||   | |   |_| ||_     _|
+|   | |       ||   |___ |   | |       ||   | |       |  |   |  
+|   | |  _    ||    ___||   | |  _    ||   | |  _    |  |   |  
+|   | | | |   ||   |    |   | | | |   ||   | | | |   |  |   |  
+|___| |_|  |__||___|    |___| |_|  |__||___| |_|  |__|  |___|  
+By: Jesse Rinaldi, Andrew Gross, Tim Marcus, Nihar Junagade
+
+*/
+
 int main() {
    clock_t start;
    double duration;
-   
-   
-   
    
    InfinInt* a = new InfinInt();
    InfinInt* b = new InfinInt();
