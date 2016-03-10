@@ -14,7 +14,7 @@ using namespace std;
 |   | |  _    ||    ___||   | |  _    ||   | |  _    |  |   |  
 |   | | | |   ||   |    |   | | | |   ||   | | | |   |  |   |  
 |___| |_|  |__||___|    |___| |_|  |__||___| |_|  |__|  |___|  
-By: Jesse Rinaldi, Andrew Gross, Tim Marcus, Nihar Junagade
+By: Jesse Rinaldi, Andrew Gross, Tim Marcus, Nihar Junagade, Daniel Kim
 
 */
 
