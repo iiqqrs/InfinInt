@@ -19,19 +19,20 @@ using namespace std;
             friend bool aBigger(InfinInt* a, InfinInt* b);
             vector<int> RawSubtract(vector<int>* a, vector<int>* b);
             vector<int> RawAdd(vector<int>* a, vector<int>* b);
-            friend void Resize(InfinInt* a, InfinInt* b);
+            friend vector<int>* Resize(vector<int>* a, vector<int>* b);
             friend string InfinIntToString(InfinInt* infIn); 
+            vector<int> flipVector(vector<int> &vec);
+            vector<int> RawMultiply(vector<int>* a, vector<int>* b);
+            void Reformat(vector<int>& vector);
         public:
             vector<int>* GetVector();
             InfinInt(string number);
             ~InfinInt();
             InfinInt();
-            //Finished Operators
             friend InfinInt* operator + (InfinInt a, InfinInt b);
             friend InfinInt* operator - (InfinInt a, InfinInt b);
             friend ostream& operator << (ostream &out, InfinInt* i);
-            friend istream& operator >> (istream &in, InfinInt* i); 
-            //ToDo Operators
-            //friend InfinInt operator * (InfinInt a, InfinInt b);
+            friend istream& operator >> (istream &in, InfinInt* i);
+            friend InfinInt* operator * (InfinInt a, InfinInt b);
     };
 #endif
