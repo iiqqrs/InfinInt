@@ -24,6 +24,8 @@ using namespace std;
             vector<int> flipVector(vector<int> &vec);
             vector<int> RawMultiply(vector<int>* a, vector<int>* b);
             void Reformat(vector<int>& vector);
+            friend vector<int> RawDivide(vector<int>* firstVec, vector<int>* secondVec);
+            friend bool isEqual(InfinInt* a, InfinInt* b);
         public:
             vector<int>* GetVector();
             InfinInt(string number);
@@ -32,7 +34,8 @@ using namespace std;
             friend InfinInt* operator + (InfinInt a, InfinInt b);
             friend InfinInt* operator - (InfinInt a, InfinInt b);
             friend ostream& operator << (ostream &out, InfinInt* i);
-            friend istream& operator >> (istream &in, InfinInt* i);
+            friend void operator >> (istream &in, InfinInt* i);
             friend InfinInt* operator * (InfinInt a, InfinInt b);
+            friend InfinInt* operator / (InfinInt a, InfinInt b);
     };
 #endif

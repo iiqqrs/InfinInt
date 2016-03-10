@@ -4,8 +4,8 @@
 #include <bitset>
 #include <vector>
 #include <fstream>
-#include "infinint.h"
 #include <sstream>
+#include "infinint.h"
 using namespace std;
 
 //Construct InfinInt
@@ -48,16 +48,29 @@ bool InfinInt::IsNeg(){
     }
 }
 
-vector<int> flipVector(vector<int> &vec) {
+vector<int> flipVector(vector<int> &vec){
     vector<int> flipped;
     
-    for (int i = vec.size()-1; i >= 0; i--) {
+    for (int i = vec.size()-1; i >= 0; i--){
         flipped.push_back(vec.at(i));
     }
     
     
     return flipped;
     
+}
+
+
+bool isEqual(InfinInt* a, InfinInt* b) {
+    for (int i = 0; i < a->GetVector()->size(); i++) {
+        if (a->GetVector()->at(i) == b->GetVector()->at(i)) {
+            continue;
+        }
+        else {
+            return false;
+        }
+    }
+    return true;
 }
 
 string pairVal(InfinInt* a, InfinInt* b){
@@ -78,15 +91,18 @@ string pairVal(InfinInt* a, InfinInt* b){
 string InfinIntToString(InfinInt* infinInt){
     string s;
     int ch;
-    if (infinInt->IsNeg()){
-        s += "-";
-    }
+    
     if (equal(infinInt->GetVector()->begin() + 1, infinInt->GetVector()->end(), infinInt->GetVector()->begin()) && infinInt->GetVector()->at(0) == 0){
         s += "0";
         return s;
     }
+    
+    if (infinInt->IsNeg()){
+        s += "-";
+    }
+    
     for(int i = infinInt->GetVector()->size()-1; i >= 0; --i){
-        if ((i == infinInt->GetVector()->size()-1) && infinInt->GetVector()->at(i) == 0) {
+        if ((i == infinInt->GetVector()->size()-1) && infinInt->GetVector()->at(i) == 0){
             continue;
         }
         ch = infinInt->GetVector()->at(i);
@@ -112,10 +128,10 @@ vector<int>* Resize(vector<int>* a, vector<int>* b){
     return a;
 }
 
-void Reformat(vector<int>& vec) {
+void Reformat(vector<int>& vec){
     int i = 0;
-    if ((vec.size() > 1) && (vec.at(i) == 0)) {
-        while (vec.at(i) == 0) {
+    if ((vec.size() > 1) && (vec.at(i) == 0)){
+        while (vec.at(i) == 0){
             vec.erase(vec.begin());
             i++;
         }
@@ -290,49 +306,42 @@ InfinInt* operator-(InfinInt a, InfinInt b){
 vector<int> RawMultiply(vector<int>* firstVec, vector<int>* secondVec){
     vector<int> a;
     vector<int> b;
-    if ((firstVec->size() > secondVec->size())) {
-        a = flipVector(*secondVec);
-        b = flipVector(*firstVec);
-    }
-    
-    else if (firstVec->size() < secondVec->size()) {
-         b = flipVector(*secondVec);
-         a = flipVector(*firstVec);
-    }
-    
-    else if (firstVec->at(firstVec->size()-1) > secondVec->at(secondVec->size()-1)) {
-        a = flipVector(*secondVec);
-        b = flipVector(*firstVec);
-    }
-    
-    else {
-        b = flipVector(*secondVec);
-        a = flipVector(*firstVec);
-    }
-    
-    //int q = b.size();
     int i = 0;
     int j = 0;
     int carry = 0;
-    
     int k = 0;
     int l = 0;
+    int pusher = 0;
+    int z = 0;
     vector<int> sum;
     vector<int> d;
     vector<vector<int>> c;
     vector<vector<int>>* cAsPtr = new vector<vector<int>>;
     
+    if ((firstVec->size() > secondVec->size())){
+        a = flipVector(*secondVec);
+        b = flipVector(*firstVec);
+    }
+    else if (firstVec->size() < secondVec->size()){
+         b = flipVector(*secondVec);
+         a = flipVector(*firstVec);
+    }
+    else if (firstVec->at(firstVec->size()-1) > secondVec->at(secondVec->size()-1)){
+        a = flipVector(*secondVec);
+        b = flipVector(*firstVec);
+    }
+    else{
+        b = flipVector(*secondVec);
+        a = flipVector(*firstVec);
+    }
     for(i = a.size() - 1; i >= 0; i--){
         for(j = b.size() - 1; j >= 0; j--){
             d.push_back((b.at(j) * a.at(i)) + carry);
             carry = d.at(k) / 10;
             d.at(k) = d.at(k) % 10;
             k++;
-            
-            
-            if ((carry > 0 && j == 0) ||(carry > 0 && j == 0)) { //So the carry is only appended to d as a separate element at the end
+            if ((carry > 0 && j == 0) ||(carry > 0 && j == 0)){ //So the carry is only appended to d as a separate element at the end
             d.push_back(carry);
-            
             }
         }
         k = 0;
@@ -342,13 +351,10 @@ vector<int> RawMultiply(vector<int>* firstVec, vector<int>* secondVec){
         j--;
     }
     cAsPtr = &c;
-    
-    int pusher = 0;//c.size()-4;
-    int z = 0;
     for(z=0; z < c.size(); z++){
         l = 0;
         while(l < pusher){
-            c.at(z).insert(c.at(z).begin(),0);//push_back(0);
+            c.at(z).insert(c.at(z).begin(),0);
             l++;
         }
         pusher++;
@@ -380,15 +386,74 @@ InfinInt* operator*(InfinInt a, InfinInt b){
     if((aPtr->is_neg && bPtr->is_neg) || (!(aPtr->is_neg) && !(bPtr->is_neg))){
         product->is_neg = false;
         //Call raw multiply (how multiplication is done on paper) here.
-        *(product->GetVector()) = RawMultiply(b.GetVector(), a.GetVector()); 
-        return product;         
+        *(product->GetVector()) = RawMultiply(b.GetVector(), a.GetVector());
+        return product;
     }
     else if(aPtr->is_neg || bPtr->is_neg){
         product->is_neg = true;
-        *(product->GetVector()) = RawMultiply(b.GetVector(), a.GetVector()); 
-        return product;        
+        *(product->GetVector()) = RawMultiply(b.GetVector(), a.GetVector());
+        return product;
     }
 }
+
+vector<int> RawDivide(vector<int>* firstVec, vector<int>* secondVec){
+    InfinInt* firstVecObj = new InfinInt();
+    InfinInt* secondVecObj = new InfinInt();
+    InfinInt* quotient = new InfinInt();
+    InfinInt* increment = new InfinInt("1");
+    InfinInt* zero = new InfinInt("0");
+    vector<int> vecCopyA = *(firstVec);
+    vector<int> vecCopyB = *(secondVec);
+    firstVecObj->is_neg = false;
+    firstVecObj->is_neg = false;
+    *(firstVecObj->GetVector()) = vecCopyA;
+    *(secondVecObj->GetVector())= vecCopyB;
+
+    
+    
+    while(aBigger(firstVecObj, secondVecObj) || isEqual(firstVecObj, zero)) { //There are definitely problems with this condition. I think the value of the firstVecObj is jumping between positive and negative
+        firstVecObj = (*firstVecObj) - (*secondVecObj);                       //until the second vector is larger than the first, rendering this while loop nearly infinite.
+        quotient = (*quotient) + (*increment);
+    }
+    
+    return *(quotient->GetVector());
+}
+
+
+InfinInt* operator / (InfinInt a, InfinInt b) {
+    InfinInt* quotientInt = new InfinInt();
+    InfinInt* aPtr = &a;
+    InfinInt* bPtr = &b;
+    vector<int> quotient;
+    quotientInt->operation_performed = "/";
+    
+    Resize(aPtr->GetVector(),bPtr->GetVector());
+    
+    
+    if (aBigger(aPtr,bPtr)) { //a bigger than b (the usual)
+        quotient = RawDivide(a.GetVector(), b.GetVector());
+    }
+    
+    else if (!aBigger(aPtr,bPtr) && isEqual(aPtr,bPtr) == false){ //b bigger than a
+        quotient.push_back(0);
+    }
+    
+    else { //If both are the same
+        quotient.push_back(1);
+    }
+    
+    //Condition Pos x Pos = Pos & Neg x Neg = Pos
+    if((aPtr->is_neg && bPtr->is_neg) || (!(aPtr->is_neg) && !(bPtr->is_neg))){
+        quotientInt->is_neg = false;
+    }
+    else if(aPtr->is_neg || bPtr->is_neg){
+        quotientInt->is_neg = true;
+    }
+    
+    *(quotientInt->GetVector()) = quotient;
+    return quotientInt;
+}
+
 
 ostream& operator<<(ostream &out, InfinInt* i){
     if(i->operation_performed == "+"){
@@ -412,14 +477,14 @@ ostream& operator<<(ostream &out, InfinInt* i){
         fl << s;
         cout << s <<endl;
     }
-    else if(i->operation_performed == "%"){
+    else if(i->operation_performed == "/"){
         string s = InfinIntToString(i);
         ofstream fl;
         fl.open("division_one.txt");
         fl << s;
         cout << s <<endl;
     }
-    else if(i->operation_performed == "%-2") {
+    else if(i->operation_performed == "/2"){
         string s = InfinIntToString(i);
         ofstream fl;
         fl.open("division_two.txt");
@@ -436,10 +501,22 @@ ostream& operator<<(ostream &out, InfinInt* i){
     return out;
 }
 
-
-istream& operator>>(istream &in, InfinInt* i){
-    string data;//a temp number to hold the input value
-    in >> data;
-    i->StringToVec(data);
-    return in;
+void operator>>(istream &in, InfinInt* i){
+    string fileName;//a temp number to hold the input value
+    in >> fileName;
+    ifstream inFS; // Input file stream
+    
+    string vecAsString;
+    inFS.open(fileName);
+    
+    if (!inFS.is_open()) {
+        cout << "Could not open file myfile.txt." << endl;
+        return; // 1 indicates error
+    }
+    
+    inFS >> vecAsString;
+    inFS.close();
+   
+    i->StringToVec(vecAsString);
+    return;
 }
