@@ -25,7 +25,7 @@ int main() {
    cout << "\t4. And two division operators (incomplete)." << endl <<endl;
    
    //Do add stuff
-   cout << "First lets add some InfinInt's" << endl;
+   cout << "First lets add some InfinInt's (int1+int2)" << endl;
    cout << "Please enter an infinint: " << endl;
    cin >> a;
    cout << "Please enter another infinit: " << endl;
@@ -38,7 +38,7 @@ int main() {
    cout << "It took " << duration << " seconds to compute that addition." <<endl;
 
    // Do subtract stuff
-   cout << "Second lets subtract some InfinInt's" << endl;
+   cout << "Second lets subtract some InfinInt's (int1-int2)" << endl;
    cout << "Please enter an infinint: " << endl;
    cin >> a;
    cout << "Please enter another infinit: " << endl;
@@ -51,7 +51,7 @@ int main() {
    cout << "It took " << duration << " seconds to compute that subtraction." <<endl;
    
    //Do multiplication things
-   cout << "Next lets multiply some InfinInt's" << endl;
+   cout << "Next lets multiply some InfinInt's (int1 * int2)" << endl;
    cout << "Please enter an infinint: " << endl;
    cin >> a;
    cout << "Please enter another infinit: " << endl;
@@ -64,7 +64,7 @@ int main() {
    cout << "It took " << duration << " seconds to compute that multiplication." <<endl;
    
    //Do integer division
-   cout << "Next lets divide some InfinInt's (Integer division)" << endl;
+   cout << "Next lets divide some InfinInt's (Integer division) (int1/int2)" << endl;
    cout << "Please enter an infinint: " << endl;
    cin >> a;
    cout << "Please enter another infinit: " << endl;

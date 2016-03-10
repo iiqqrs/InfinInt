@@ -102,6 +102,7 @@ string InfinIntToString(InfinInt* infinInt){
     }
     
     for(int i = infinInt->GetVector()->size()-1; i >= 0; --i){
+        
         if ((i == infinInt->GetVector()->size()-1) && infinInt->GetVector()->at(i) == 0){
             continue;
         }
